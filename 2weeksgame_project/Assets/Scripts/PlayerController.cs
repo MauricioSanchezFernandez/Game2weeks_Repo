@@ -27,6 +27,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        Movement();
+        Jump();
+    }
+
+    void Movement()
+    {
+        horizontalInput = Input.GetAxis("Horizontal");
+        playerRb.linearVelocity = new Vector2 (horizontalInput * speed,playerRb.linearVelocity.y);
+    }
+
+    void Jump() 
+    {
+    
     }
 }
