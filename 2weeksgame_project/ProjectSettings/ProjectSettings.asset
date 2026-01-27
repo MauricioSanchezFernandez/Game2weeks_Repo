@@ -4,7 +4,7 @@
 PlayerSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 28
-  productGUID: 2e9214d55e28e8e4ba0befd5d911713d
+  productGUID: e6ce914ccd825bd43b9508504fa53229
   AndroidProfiler: 0
   AndroidFilterTouchesWhenObscured: 0
   AndroidEnableSustainedPerformanceMode: 0
@@ -680,10 +680,10 @@ PlayerSettings:
   captureStartupLogs: {}
   activeInputHandler: 1
   windowsGamepadBackendHint: 0
-  cloudProjectId: 8a68bcae-92a5-4849-a0bf-c059c1a55458
+  cloudProjectId: 7855b59c-673e-4689-a222-a2dd27c20ce3
   framebufferDepthMemorylessMode: 0
   qualitySettingsNames: []
-  projectName: 2weeksgame_project
+  projectName: 2weeksgame_project 2026-01-27_19-00-00
   organizationId: mausanfer16
   cloudEnabled: 0
   legacyClampBlendShapeWeights: 0
