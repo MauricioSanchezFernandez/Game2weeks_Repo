@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        playerRb = Getcomponent<Rigibody2D>();
-        anim = Getcomponent<Animator>();
+        playerRb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
 
     }
 
