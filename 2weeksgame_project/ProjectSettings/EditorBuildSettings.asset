@@ -9,5 +9,5 @@ EditorBuildSettings:
     path: Assets/gamename/Scenes/SCN1.unity
     guid: 8c9cfa26abfee488c85f1582747f6a02
   m_configObjects:
-    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 4accc9f1aa0f8f143afe99ec41615af5, type: 3}
+    com.unity.input.settings.actions: {fileID: -944628639613478452, guid: e8a71f000c8aecf4baf1356885c039a3, type: 3}
   m_UseUCBPForAssetBundles: 0
