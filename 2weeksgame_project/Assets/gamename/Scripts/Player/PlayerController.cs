@@ -1,41 +1,22 @@
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
-
-    [Header("Movement and Jump Configuration")]
-    [SerializeField] float speed;
-    [SerializeField] float jumpForce;
-
-
-    //variables de estasisticas player
-    Rigidbody2D playerRb; //almacen del rigbody del player
-    Animator anim; //almacen del controlador de animacion del player
-    PlayerInput input; //almacen del controlador de inputs del player
-    Vector2 moveInput; //almacen del valor de los botones de movimiento
    
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public float speed
+    private Rigidbody2d playerRb;
+    private float move;
+
     void Start()
     {
-        playerRb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        playerRb = GetComponent<Rigibody2D>();
+        erjoesfd
     }
 
-    // Update is called once per frame
+    
     void Update()
     {
-        Movement();
-        Jump();
+        move = Input.GetAxisRaw("Horizontal");
+        playerRb.linearVelocity = new Vector2(move*speed,  playerRb.linearVelocity.y);
     }
-
-    void Movement()
-    {
-        playerRb.linearVelocity = new Vector2(moveInput.x * speed, playerRb.linearVelocity.y);
-    }
-    void Jump()
-    {
-        playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-    }
-
 }
