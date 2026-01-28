@@ -5,7 +5,7 @@ public class PlayerController : MonoBehaviour
 
     //variables de referencia-> conectado con el personaje
 
-    //investigar por que no se pone azul
+    //investigar por que no se pone azul en mi ordenador de casa
     private Rigidbody2D playerRb;
     private Animator anim;
     private float horizontalInput;
@@ -39,6 +39,11 @@ public class PlayerController : MonoBehaviour
 
     void Jump() 
     {
-    
+        if (Input.GetKeyDown(KeyCode.Space)) 
+        {
+            playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+
+        }
+
     }
 }
