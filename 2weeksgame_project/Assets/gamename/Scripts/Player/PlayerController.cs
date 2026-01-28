@@ -1,27 +1,23 @@
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour 
+public class PlayerController : MonoBehaviour
 {
 
-    //variables de referencia-> conectado con el personaje
-
-    //investigar por que no se pone azul en mi ordenador de casa
+    //variables de ref
     private Rigidbody2D playerRb;
     private Animator anim;
     private float horizontalInput;
 
-
-    //variables de estadisticas del player
+    //variabless  estadistica
     public float speed;
     public float jumpForce;
 
-    
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
-
     }
 
     // Update is called once per frame
@@ -34,16 +30,19 @@ public class PlayerController : MonoBehaviour
     void Movement()
     {
         horizontalInput = Input.GetAxis("Horizontal");
-        playerRb.linearVelocity = new Vector2 (horizontalInput * speed,playerRb.linearVelocity.y);
+        playerRb.linearVelocityX= new Vector2(horizontalInput * speed, playerRb.linearVelocityX.y);
+    
     }
 
-    void Jump() 
+    void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space)) 
-        {
-            playerRb.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
-
-        }
+        playerRb.AddForce(Vector3.up * jumpForce);
 
     }
+
 }
+
+
+
+
+
