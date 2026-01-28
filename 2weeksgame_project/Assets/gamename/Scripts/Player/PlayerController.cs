@@ -2,21 +2,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-   
-    public float speed
-    private Rigidbody2d playerRb;
-    private float move;
+
+
+    public float move;
+    public float speed;
+    Rigidbody2D playerRb;
 
     void Start()
     {
-        playerRb = GetComponent<Rigibody2D>();
-        erjoesfd
+        playerRb = GetComponent<Rigidbody2D>();
     }
 
     
     void Update()
     {
         move = Input.GetAxisRaw("Horizontal");
-        playerRb.linearVelocity = new Vector2(move*speed,  playerRb.linearVelocity.y);
+        playerRb.linearVelocity = new Vector2(move * speed, playerRb.linearVelocity.y);
     }
 }
