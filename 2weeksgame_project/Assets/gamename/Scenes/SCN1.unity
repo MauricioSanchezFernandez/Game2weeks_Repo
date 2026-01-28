@@ -516,10 +516,10 @@ GameObject:
   - component: {fileID: 1831134519}
   - component: {fileID: 1831134518}
   - component: {fileID: 1831134517}
-  - component: {fileID: 1831134521}
   - component: {fileID: 1831134516}
   - component: {fileID: 1831134515}
   - component: {fileID: 1831134520}
+  - component: {fileID: 1831134521}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -689,7 +689,7 @@ Transform:
   m_GameObject: {fileID: 1831134514}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.90113175, y: -0.88441086, z: 0}
+  m_LocalPosition: {x: 0.90113175, y: -1.31, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -707,7 +707,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Unity.InputSystem::UnityEngine.InputSystem.PlayerInput
-  m_Actions: {fileID: -944628639613478452, guid: e8a71f000c8aecf4baf1356885c039a3, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: 0e9c8d6f3f141404b801c744a24cd5eb, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -722,7 +722,7 @@ MonoBehaviour:
   m_ActionEvents: []
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: 
+  m_DefaultActionMap: Gameplay
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!114 &1831134521
@@ -734,22 +734,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1831134514}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b7830ad1c1baba14dbde8430e46287bb, type: 3}
+  m_Script: {fileID: 11500000, guid: 9e5460fcc32630746b7d092e8a86cf78, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Player_controller2D
-  speed: 0
-  jumpForce: 0
-  isGrounded: 0
-  isFacingRight: 0
-  groundCheck: {fileID: 0}
-  groundCheckRadius: 0
-  groundLayer:
-    m_Bits: 0
-  playerRb: {fileID: 0}
-  anim: {fileID: 0}
-  input: {fileID: 0}
-  moveInput: {x: 0, y: 0}
-  canAttack: 0
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerController
+  speed: 1
+  jumpForce: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
