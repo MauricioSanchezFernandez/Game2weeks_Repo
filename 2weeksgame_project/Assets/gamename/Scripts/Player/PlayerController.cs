@@ -8,7 +8,6 @@ public class PlayerController : MonoBehaviour
 
     //Variables de ref
     Rigidbody2D playerRb; //almacen del rigbody del player
-    Animator anim; //almacen del controlador de animacion del player
     float horizontalInput;
 
 
@@ -17,7 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
     [SerializeField] bool isFacingRight; //define orientacion del personaje
-    
+
+    [Header("Animation Configuration")]
+    Animator anim; //almacen del controlador de animacion del player
 
     [Header("GroundCheck Configuration")]
     [SerializeField] bool isGrounded;
@@ -63,8 +64,7 @@ public class PlayerController : MonoBehaviour
         //Logica de deteccion del suelo
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
-        Debug.Log(isGrounded);
-
+        
         //logica flip del personaje
               
         if (horizontalInput > 0 && !isFacingRight) Flip();
