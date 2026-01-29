@@ -63,6 +63,7 @@ public class PlayerController : MonoBehaviour
         //Logica de deteccion del suelo
 
         isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        Debug.Log(isGrounded);
 
         //logica flip del personaje
               

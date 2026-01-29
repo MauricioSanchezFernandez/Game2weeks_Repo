@@ -744,13 +744,13 @@ MonoBehaviour:
   isFacingRight: 0
   isGrounded: 0
   groundCheck: {fileID: 514234567}
-  groundCheckRadius: 0
+  groundCheckRadius: 5
   groundLayer:
     serializedVersion: 2
-    m_Bits: 0
-  powerDash: 4
-  timeDashing: 1
-  cooldownDash: 2
+    m_Bits: 8
+  powerDash: 100
+  timeDashing: 2
+  cooldownDash: 1
   tr: {fileID: 1831134521}
 --- !u!96 &1831134521
 TrailRenderer:
