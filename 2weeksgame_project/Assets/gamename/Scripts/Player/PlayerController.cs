@@ -16,7 +16,9 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float speed;
     [SerializeField] float jumpForce;
     [SerializeField] bool isFacingRight; //define orientacion del personaje
+    bool canMove = true; //se puede mover?
 
+    
     [Header("Animation Configuration")]
     Animator anim; //almacen del controlador de animacion del player
 
@@ -29,10 +31,12 @@ public class PlayerController : MonoBehaviour
     [Header("Dash Configuration")]
      bool canDash = true;  //puede dashear?
     bool isDashing = false; //esta dasheando?
-    [SerializeField] float powerDash;//potencia del dash
+       [SerializeField] float powerDash;//potencia/velocidad del dash
     [SerializeField] float timeDashing; //tiempo de dash
     [SerializeField] float cooldownDash; //cooldown del dash quien lo diria
     [SerializeField] TrailRenderer tr; //efecto dash
+    [SerializeField] float gravedadInicial; 
+
 
 
 
@@ -41,12 +45,15 @@ public class PlayerController : MonoBehaviour
     {
         playerRb = GetComponent<Rigidbody2D>(); //autoreferencias un componente propio
         anim = GetComponent<Animator>();
+        gravedadInicial = playerRb.gravityScale;
+        //Movement(horizontalInput * Time.fixedDeltaTime, )
        
     }
 
     void Start()
     {
                isFacingRight = true;
+                
     }
 
     
@@ -136,21 +143,24 @@ public class PlayerController : MonoBehaviour
 
     //corrutina dash-corrutinas
     IEnumerator Dashc()
-    { 
-     canDash = false;
+    {
+        canMove = false;
+        canDash = false;
         isDashing = true;
-        float originalGravity = playerRb.gravityScale;
         playerRb.gravityScale = 0;
         playerRb.linearVelocity = new Vector2(transform.localScale.x * powerDash, 0f);
         tr.emitting = true;
         yield return new WaitForSeconds(timeDashing);
         tr.emitting = false;
-        playerRb.gravityScale = originalGravity;
+        playerRb.gravityScale = gravedadInicial;
         isDashing = false;
+        canMove = true;
         yield return new WaitForSeconds(cooldownDash);
         canDash = true;
+        
 
     }
+
 
 
 }
