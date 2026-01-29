@@ -561,7 +561,7 @@ Transform:
   m_GameObject: {fileID: 696307456}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1.023, z: 0}
+  m_LocalPosition: {x: 0, y: -1.03, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -580,6 +580,7 @@ GameObject:
   - component: {fileID: 1727981070}
   - component: {fileID: 1727981069}
   - component: {fileID: 1727981068}
+  - component: {fileID: 1727981073}
   m_Layer: 0
   m_Name: Player (1)
   m_TagString: Ground
@@ -749,13 +750,34 @@ Transform:
   m_GameObject: {fileID: 1727981067}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.74, y: -0.81, z: 0}
+  m_LocalPosition: {x: 0.87, y: -0.81, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 696307457}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1727981073
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1727981067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 11364701ba613954db3046f67c439951, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::pruebas
+  velocidadMovimiento: 400
+  suavizadoMovimiento: 0.334
+  fuerzaSalto: 400
+  queesSuelo:
+    serializedVersion: 2
+    m_Bits: 8
+  groundCheck: {fileID: 696307457}
+  domensionescaja: {x: 0, y: 0.25, z: 0}
+  enSuelo: 0
 --- !u!1 &1831134514
 GameObject:
   m_ObjectHideFlags: 0
@@ -777,7 +799,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!61 &1831134515
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1038,6 +1060,15 @@ TrailRenderer:
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.27741936
+        value: 0.995283
+        inSlope: 0
+        outSlope: 0
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0
+        outWeight: 0
       m_PreInfinity: 2
       m_PostInfinity: 2
       m_RotationOrder: 4

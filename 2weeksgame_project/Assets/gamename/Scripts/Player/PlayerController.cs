@@ -31,7 +31,7 @@ public class PlayerController : MonoBehaviour
     [Header("Dash Configuration")]
      bool canDash = true;  //puede dashear?
     bool isDashing = false; //esta dasheando?
-       [SerializeField] float powerDash;//potencia/velocidad del dash
+    [SerializeField] float powerDash;//potencia/velocidad del dash
     [SerializeField] float timeDashing; //tiempo de dash
     [SerializeField] float cooldownDash; //cooldown del dash quien lo diria
     [SerializeField] TrailRenderer tr; //efecto dash
