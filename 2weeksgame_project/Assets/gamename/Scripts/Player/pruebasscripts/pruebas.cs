@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class pruebas : MonoBehaviour
@@ -21,10 +22,21 @@ public class pruebas : MonoBehaviour
     [SerializeField] bool enSuelo;
     bool salto = false;
 
+    [Header("Dash")]
+    [SerializeField] float velocidadDash;
+    [SerializeField] float tiempoDash;
+    float gravedadInicial;
+    bool puedeHacerDash = true;
+    bool sePuedeMover = true;
+
+    [Header("Animacion")]
+    Animator animator;
 
     private void Start()
     {
         playerRb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+        gravedadInicial = playerRb.gravityScale;
     }
 
     private void Update()
@@ -34,12 +46,27 @@ public class pruebas : MonoBehaviour
         { 
             salto = true;
         }
+
+        if (Input.GetKeyDown(KeyCode.LeftShift) && puedeHacerDash)
+        {
+
+            StartCoroutine(Dashc());
+
+        }
+
     }
 
     private void FixedUpdate()
     {
         enSuelo = Physics2D.OverlapBox(groundCheck.position, domensionescaja, 0f, queesSuelo);
-        Mover(movimientohorizontal * Time.fixedDeltaTime, salto);
+
+        if (sePuedeMover)
+        {
+
+            Mover(movimientohorizontal * Time.fixedDeltaTime, salto);
+
+        }
+        
 
         salto = false;
     }
@@ -70,19 +97,31 @@ public class pruebas : MonoBehaviour
             playerRb.AddForce(new Vector2(0f, fuerzaSalto));
             
         }
+         
+    }
+    IEnumerator Dashc()
+    {
+
+        sePuedeMover = false;
+        puedeHacerDash = false;
+        playerRb.linearVelocity = new Vector2(velocidadDash * transform.localScale.x, 0);
+        yield return new WaitForSeconds(tiempoDash);
+
+        sePuedeMover = true;
+        puedeHacerDash = true;
+        playerRb.gravityScale = gravedadInicial;
+
+    }
 
 
-        void Girar()
-        {
-            mirandoDerecha = !mirandoDerecha;
-            Vector3 escala = transform.localScale;
-            escala.x *= -1;
-            transform.localScale = escala;
-        
-        }
 
-        
 
+    void Girar()
+    {
+        mirandoDerecha = !mirandoDerecha;
+        Vector3 escala = transform.localScale;
+        escala.x *= -1;
+        transform.localScale = escala;
 
     }
 
