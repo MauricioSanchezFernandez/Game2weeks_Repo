@@ -1,15 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-public class pruebas : MonoBehaviour
+public class prueba2 : MonoBehaviour
 {
-
     Rigidbody2D playerRb;
 
     [Header("Movimiento")]
     float movimientohorizontal = 0f;
     [SerializeField] float velocidadMovimiento;
-    [Range (0, 0.5f)][SerializeField] float suavizadoMovimiento;
+    [Range(0, 0.5f)][SerializeField] float suavizadoMovimiento;
     Vector3 velocidad = Vector3.zero;
     bool mirandoDerecha = true;
 
@@ -44,8 +43,8 @@ public class pruebas : MonoBehaviour
     private void Update()
     {
         movimientohorizontal = Input.GetAxisRaw("Horizontal") * velocidadMovimiento;
-        if (Input.GetButtonDown("Jump")) 
-        { 
+        if (Input.GetButtonDown("Jump"))
+        {
             salto = true;
         }
 
@@ -68,7 +67,7 @@ public class pruebas : MonoBehaviour
             Mover(movimientohorizontal * Time.fixedDeltaTime, salto);
 
         }
-        
+
 
         salto = false;
     }
@@ -78,14 +77,14 @@ public class pruebas : MonoBehaviour
         Vector3 velocidadObjetivo = new Vector2(mover, playerRb.linearVelocity.y);
         playerRb.linearVelocity = Vector3.SmoothDamp(playerRb.linearVelocity, velocidadObjetivo, ref velocidad, suavizadoMovimiento);
 
-        if (mover > 0 && !mirandoDerecha) 
-        { 
-          
+        if (mover > 0 && !mirandoDerecha)
+        {
+
             Girar();
 
 
         }
-        
+
 
         else if (mover < 0 && mirandoDerecha)
         {
@@ -97,9 +96,9 @@ public class pruebas : MonoBehaviour
         {
             enSuelo = false;
             playerRb.AddForce(new Vector2(0f, fuerzaSalto));
-            
+
         }
-         
+
     }
     IEnumerator Dashc()
     {
