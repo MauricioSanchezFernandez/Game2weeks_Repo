@@ -28,6 +28,8 @@ public class pruebas : MonoBehaviour
     float gravedadInicial;
     bool puedeHacerDash = true;
     bool sePuedeMover = true;
+    [SerializeField] TrailRenderer trailRenderer;
+
 
     [Header("Animacion")]
     Animator animator;
@@ -106,10 +108,11 @@ public class pruebas : MonoBehaviour
         puedeHacerDash = false;
         playerRb.linearVelocity = new Vector2(velocidadDash * transform.localScale.x, 0);
         yield return new WaitForSeconds(tiempoDash);
-
+        trailRenderer.emitting = true;
         sePuedeMover = true;
         puedeHacerDash = true;
         playerRb.gravityScale = gravedadInicial;
+        trailRenderer.emitting = false;
 
     }
 

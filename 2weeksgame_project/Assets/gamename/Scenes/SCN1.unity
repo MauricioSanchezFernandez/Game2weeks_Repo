@@ -647,7 +647,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 5
+  m_Time: 0.25
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -707,8 +707,8 @@ TrailRenderer:
   m_MinVertexDistance: 0.1
   m_MaskInteraction: 0
   m_Autodestruct: 0
-  m_Emitting: 1
-  m_ApplyActiveColorSpace: 1
+  m_Emitting: 0
+  m_ApplyActiveColorSpace: 0
 --- !u!1 &1727981067
 GameObject:
   m_ObjectHideFlags: 0
@@ -923,6 +923,7 @@ MonoBehaviour:
   enSuelo: 0
   velocidadDash: 20
   tiempoDash: 0.4
+  trailRenderer: {fileID: 1522016237}
 --- !u!1 &1831134514
 GameObject:
   m_ObjectHideFlags: 0
