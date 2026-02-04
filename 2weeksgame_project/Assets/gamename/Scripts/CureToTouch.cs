@@ -9,9 +9,9 @@ public class CureToTouch : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-       // if (collision.TryGetComponent(out VidaJugador vidaJugador))
+        if (collision.TryGetComponent(out VidaJugador vidaJugador))
         {
-      //      vidaJugador.CurarVida(cantidadCuracion);
+            vidaJugador.CurarVida(cantidadCuracion);
         }
     }
 

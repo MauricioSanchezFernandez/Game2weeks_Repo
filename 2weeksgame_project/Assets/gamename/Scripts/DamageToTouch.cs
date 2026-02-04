@@ -9,9 +9,9 @@ public class DamageToTouch : MonoBehaviour
 
     void OnTriggerEnter2D(Collider2D collision)
     {
-       // if (collision.TryGetComponent(out VidaJugador vidaJugador))
+        if (collision.TryGetComponent(out VidaJugador vidaJugador))
         {
-       //     vidaJugador.TomarDaño(dañoPorToque);
+            vidaJugador.TomarDaño(dañoPorToque);
         }
     }
 
