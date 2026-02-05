@@ -12,7 +12,7 @@ public class SpawnPoint : MonoBehaviour
         if (other.CompareTag("Player"))
         {
 
-            //GameManager.Instance.lastSpawnPoint(gameObject);
+            GameManager.Instance.lastSpawnPoint(gameObject);
         }
     }
 
