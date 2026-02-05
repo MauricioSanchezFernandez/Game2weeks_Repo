@@ -33,9 +33,16 @@ public class BarDash : MonoBehaviour
         do
         {
             bar.value = bar.value - 0.1f;
-        }
-        while (bar.value == 0.1);
+            yield return new WaitForSeconds(0.01f);
+        } while (bar.value > 0);
+      
         yield return new WaitForSeconds(cooldown);
+
+        do
+        {
+            bar.value = bar.value + 0.1f;
+            yield return new WaitForSeconds(0.01f);
+        } while (bar.value == 0);
         bar.value = originalbarValue;
 
 
