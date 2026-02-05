@@ -1,152 +1,195 @@
 using System.Collections;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem;
+using UnityEngine.Timeline;
 
 public class PlayerController : MonoBehaviour
 {
 
-    //Variables de ref
-    Rigidbody2D playerRb; //almacen del rigbody del player
-    float horizontalInput = 0;
+    Rigidbody2D playerRb;
 
-
-    //Variables estdisticas del player
-    [Header("Movement Configuration")]
-    [SerializeField] float horizontalMovement = 0f; 
+    [Header("Configuation Movement")]
+    float movementHorizontal = 0f;
     [SerializeField] float speedMovement;
-    [Range(0, 0.5f)][SerializeField] float smoothingMovement;
-    [SerializeField] bool isFacingRight; //define orientacion del personaje
+    [Range(0, 0.5f)][SerializeField] float smoothMovement;
     Vector3 speed = Vector3.zero;
-    bool canMove = true; //se puede mover?
+    bool isFacingRight = true;
+    float inputX;
 
-    [Header("Jump Configuration")]
-    [SerializeField] float jumpForce;
-    bool jump = false;
 
-    [Header("GroundCheck Configuration")]
-    [SerializeField] LayerMask groundLayer; //Define la capa que puede tocar el detector de suelo
-    [SerializeField] Transform groundCheck; //Posicion del detector del suelo
-    [SerializeField] float groundCheckRadius; //Define el radio del circulo detector de suelo
+    [Header("Configuation Jump")]
+    [SerializeField] float powerJump;
+    [SerializeField] LayerMask layerGround;
+    [SerializeField] Transform groundCheck;
+    [SerializeField] Vector3 radiusBox;
     [SerializeField] bool isGrounded;
+    bool CamJump = false;
 
-    [Header("Dash Configuration")]
-    bool canDash = true;  //puede dashear?
-    bool isDashing = false; //esta dasheando?
-    [SerializeField] float powerDash;//potencia/velocidad del dash
-    [SerializeField] float timeDashing; //tiempo de dash
-    [SerializeField] float cooldownDash; //cooldown del dash quien lo diria
-    [SerializeField] TrailRenderer tr; //efecto dash
-    [SerializeField] float originalGravity;
-   
+    [Header("Configuation Dash")]
+    [SerializeField] float powerDash;
+    [SerializeField] float timeDash;
+    float originalGravity;
+    bool canDash = true;
+    bool canMove = true;
+    [SerializeField] float CooldownDash;
+    [SerializeField] TrailRenderer trailRenderer;
 
-    [Header("Animation Configuration")]
-    Animator anim; //almacen del controlador de animacion del player
-
-    
-    
+    [Header("Configuation Attack")]
+    bool canAttack;
+    [SerializeField] Transform Weapon;
 
 
+    [Header("Configuation Slide")]
+    [SerializeField] Transform wallController;
+    [SerializeField] Vector3 boxDimensionSlide;
+    bool inWall; //contacto con la pared
+    bool inSlide; //deslizando
+    [SerializeField] float speedSlide;
+    //saltopared
+    [SerializeField] float powerJumpWallX;
+    [SerializeField] float powerJumpWallY;
+    [SerializeField] float timeJumpWall;
+    bool isJumpWall; 
 
 
 
-    private void Awake()
+    [Header("Configuation Animation")]
+    Animator anim;
+
+    private void Start()
     {
-        playerRb = GetComponent<Rigidbody2D>(); //autoreferencias un componente propio
+        playerRb = GetComponent<Rigidbody2D>();
         anim = GetComponent<Animator>();
         originalGravity = playerRb.gravityScale;
-        //Movement(horizontalInput * Time.fixedDeltaTime, )
-       
+        trailRenderer.emitting = false;
+        canAttack = true;
     }
 
-    void Start()
+    private void Update()
     {
-               isFacingRight = true;
-                
-    }
-
-    
-    void Update()
-    {
-        Movement();
+        inputX = Input.GetAxisRaw("Horizontal");
+        movementHorizontal = inputX * speedMovement;
+        anim.SetFloat("Horizontal",Mathf.Abs(movementHorizontal));
+        anim.SetFloat("SpeedY", playerRb.linearVelocity.y);
+        anim.SetBool("Sliding", inSlide);
         Jump();
         Dash();
-
-        if (isDashing)
-        { 
-            return;
-        }
-
-        //Logica de deteccion del suelo
-
-        isGrounded = Physics2D.OverlapCircle(groundCheck.position, groundCheckRadius, groundLayer);
+        Attack();
+        Slice();
         
-        //logica flip del personaje
-              
-        if (horizontalInput > 0 && !isFacingRight) Flip();
-        if (horizontalInput < 0 && isFacingRight) Flip();
+
+
     }
 
-        private void FixedUpdate()
+    private void FixedUpdate()
     {
+        isGrounded = Physics2D.OverlapBox(groundCheck.position, radiusBox, 0f, layerGround);
+        anim.SetBool("inGround",isGrounded);
+        anim.SetBool("ButtonDown", Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D));
 
-        if (isDashing)
+        inWall = Physics2D.OverlapBox(wallController.position, boxDimensionSlide, 0f, layerGround);
+
+        if (canMove)
         {
-            return;
+
+            Movement(movementHorizontal * Time.fixedDeltaTime, CamJump);
+
         }
 
-        Movement();
+
+        CamJump = false;
+
+        if (inSlide)
+        {
+
+            playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, Mathf.Clamp(playerRb.linearVelocity.y, -speedSlide, float.MaxValue));
+        
+        }
+
     }
 
 
-    //INPUTS
-    void Movement()
-    {
-        horizontalInput = Input.GetAxis("Horizontal");
-       // playerRb.linearVelocity = new Vector2(horizontalInput * speed, playerRb.linearVelocity.y);
+    //Inputs
 
-                
+    private void Movement(float mover, bool saltar)
+    {
+       
+        if (!isJumpWall)
+        {
+
+            Vector3 velocidadObjetivo = new Vector2(mover, playerRb.linearVelocity.y);
+            playerRb.linearVelocity = Vector3.SmoothDamp(playerRb.linearVelocity, velocidadObjetivo, ref speed, smoothMovement);
+
+        }
+       
+
+        if (mover > 0 && !isFacingRight)
+        {
+
+            Flip();
+
+        }
+
+
+        else if (mover < 0 && isFacingRight)
+        {
+
+            Flip();
+        }
+
+        if (isGrounded && saltar)
+        {
+            isGrounded = false;
+            playerRb.AddForce(new Vector2(0f, powerJump));
+
+        }
+
     }
 
     void Jump()
     {
-        if (Input.GetKeyDown(KeyCode.Space) && isGrounded) 
-        { playerRb.AddForce(Vector3.up * jumpForce, ForceMode2D.Impulse);
 
-            jump = true;
         
+        if (Input.GetKeyDown(KeyCode.Space) && isGrounded && !inSlide)
+        {
+            CamJump = true;
         }
-        
+
+
+        if (CamJump && inWall && inSlide)
+        { 
+            JumpWall();
+
+        }       
+    
+
+    }
+
+
+    void JumpWall()
+    {
+        inWall = false;
+        playerRb.linearVelocity = new Vector2(powerJumpWallX * -inputX, powerJumpWallY);
+
+        StartCoroutine(ChangeJumpWall());
     
     }
 
-    void Attack()
-    {
-        if (Input.GetKey(KeyCode.E) || Input.GetKeyDown(KeyCode.Mouse0)) //mantenerpulsado
-        {
-            //configattack
-        }
-    }
 
-    void Dash()
+    private void Dash()
     {
-        if (Input.GetKeyDown(KeyCode.LeftShift) || Input.GetKeyDown(KeyCode.Mouse1) && canDash) //pulsar1
+        if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
         {
+
             StartCoroutine(Dashc());
+
         }
     }
 
-    void Interact()
-    {
-        if (Input.GetKeyDown(KeyCode.W)) //pulsar1
-        {
-            //config interact
-        }
-    }
+    
+
 
     void Flip()
     {
-
         isFacingRight = !isFacingRight;
         Vector3 escala = transform.localScale;
         escala.x *= -1;
@@ -154,29 +197,108 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    //corrutina dash-corrutinas
+    private void Attack()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && isGrounded && canAttack)
+        {
+
+           StartCoroutine(Attackc());
+
+
+        }
+    }
+
+    void Slice()
+    {
+
+        if (!isGrounded && inWall && inputX != 0)
+        {
+            inSlide = true;
+
+        }
+
+        else
+        {
+            inSlide = false;
+
+        }
+    }
+
+    private void Interact()
+    {
+        if (Input.GetKeyDown(KeyCode.W))
+        {
+
+
+
+        }
+    }
+
+    //corrutina saltopared
+
+    IEnumerator ChangeJumpWall()
+    {
+        isJumpWall = true;
+        yield return new WaitForSeconds(timeJumpWall);
+        isJumpWall = false;
+
+    }
+
+
+    //corrutina dash
     IEnumerator Dashc()
     {
-              
+
         canMove = false;
         canDash = false;
-        isDashing = true;
         playerRb.gravityScale = 0;
-        playerRb.linearVelocity = new Vector2(transform.localScale.x * powerDash, 0f);
-        tr.emitting = true;
-        yield return new WaitForSeconds(timeDashing);
-        tr.emitting = false;
-        playerRb.gravityScale = originalGravity;
-        isDashing = false;
+        playerRb.linearVelocity = new Vector2(powerDash * transform.localScale.x, 0);
+        anim.SetTrigger("DashANIM");
+        trailRenderer.emitting = true;
+        yield return new WaitForSeconds(timeDash);
         canMove = true;
-        yield return new WaitForSeconds(cooldownDash);
+        playerRb.gravityScale = originalGravity;
+        trailRenderer.emitting = false;
+        yield return new WaitForSeconds(CooldownDash);
         canDash = true;
+
+    }
+
+    //corrutina attack
+
+
+    IEnumerator Attackc()
+    {
+        canAttack = false; //Quitar la posibilidad de atacar
+        float actualSpeed = speedMovement; //guardamos velocidad atual para devolverla luego
+        speedMovement = 0; //pj se queda quieto
         
+        yield return new WaitForSeconds(0.8f); //para por el numero de segundos en el juego
+        speedMovement = actualSpeed;
+        canAttack = true;
+        //devolver velocidad y capacidad de ataque, acaba la corrutina
+        yield return null; //devolverle un tiempo a la corrutina
 
     }
 
 
 
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        //Gizmos.DrawCube(groundCheck.position, radiusBox);
+      //  Gizmos.DrawCube(wallController.position, boxDimensionSlide);
+
+    }
+
+
+
+
+
+
+
+
+
+
 }
-
-
