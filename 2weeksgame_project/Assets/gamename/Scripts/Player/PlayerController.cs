@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.Timeline;
 using UnityEngine.UI;
 
+
 public class PlayerController : MonoBehaviour
 {
 
@@ -50,7 +51,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField] float powerJumpWallX;
     [SerializeField] float powerJumpWallY;
     [SerializeField] float timeJumpWall;
-    bool isJumpWall;
+    bool jumpInWall;
 
 
 
@@ -115,7 +116,7 @@ public class PlayerController : MonoBehaviour
     private void Movement(float mover, bool saltar)
     {
 
-        if (!isJumpWall)
+        if (!jumpInWall)
         {
 
             Vector3 velocidadObjetivo = new Vector2(mover, playerRb.linearVelocity.y);
@@ -138,7 +139,7 @@ public class PlayerController : MonoBehaviour
             Flip();
         }
 
-        if (isGrounded && saltar)
+        if (isGrounded && saltar && !inSlide)
         {
             isGrounded = false;
             playerRb.AddForce(new Vector2(0f, powerJump));
@@ -241,9 +242,9 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator ChangeJumpWall()
     {
-        isJumpWall = true;
+        jumpInWall = true;
         yield return new WaitForSeconds(timeJumpWall);
-        isJumpWall = false;
+        jumpInWall = false;
 
     }
 
