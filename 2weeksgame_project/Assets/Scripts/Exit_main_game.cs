@@ -1,5 +1,10 @@
-public void GoToMainMenu()
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class SceneNavigation : MonoBehaviour // La clase es obligatoria
 {
-    
-    UnityEngine.SceneManagement.SceneManager.LoadScene(0);
+    public void GoToMainMenu()
+    {
+        SceneManager.LoadScene(0);
+    }
 }

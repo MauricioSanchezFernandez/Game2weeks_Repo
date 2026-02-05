@@ -1,34 +1,12 @@
 using UnityEngine;
-using UnityEngine.SceneManagement; // Librería necesaria para cambiar de escena
+using UnityEngine.SceneManagement;
 
-public class MainMenu : MonoBehaviour
+// Cambia 'MainMenu' a 'Start_Main_Menu'
+public class Start_Main_Menu : MonoBehaviour
 {
     public void PlayGame()
     {
-        // Carga la siguiente escena en la lista de Build Settings
+        // Asegúrate de que la siguiente escena esté en File -> Build Settings
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 }
-using UnityEngine;
-using UnityEngine.SceneManagement; // Librería necesaria para cambiar de escena
-
-public class MainMenu : MonoBehaviour
-{
-    public void PlayGame()
-    {
-        // Carga la siguiente escena en la lista de Build Settings
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-}
-using UnityEngine;
-using UnityEngine.SceneManagement; // Librería necesaria para cambiar de escena
-
-public class MainMenu : MonoBehaviour
-{
-    public void PlayGame()
-    {
-        // Carga la siguiente escena en la lista de Build Settings
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-}
-
