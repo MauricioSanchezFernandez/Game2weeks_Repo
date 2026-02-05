@@ -29,7 +29,12 @@ public class BarDash : MonoBehaviour
 
     IEnumerator BAR()
     {
-        bar.value = bar.value - 1;
+
+        do
+        {
+            bar.value = bar.value - 0.1f;
+        }
+        while (bar.value == 0.1);
         yield return new WaitForSeconds(cooldown);
         bar.value = originalbarValue;
 
