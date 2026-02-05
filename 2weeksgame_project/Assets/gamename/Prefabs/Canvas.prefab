@@ -105,7 +105,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: '::'
   bar: {fileID: 3125745331423897837}
   originalbarValue: 1
-  cooldown: 1
+  cooldown: 2
 --- !u!1 &1841893287500261363
 GameObject:
   m_ObjectHideFlags: 0

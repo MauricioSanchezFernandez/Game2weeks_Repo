@@ -355,7 +355,7 @@ MonoBehaviour:
   isGrounded: 0
   powerDash: 15
   timeDash: 0.3
-  CooldownDash: 1
+  CooldownDash: 2
   trailRenderer: {fileID: 7652986377589256621}
   Weapon: {fileID: 0}
   wallController: {fileID: 5533480811628809814}
