@@ -1043,6 +1043,7 @@ GameObject:
   m_Component:
   - component: {fileID: 716303609}
   - component: {fileID: 716303610}
+  - component: {fileID: 716303611}
   m_Layer: 5
   m_Name: BarraDash
   m_TagString: Untagged
@@ -1119,10 +1120,25 @@ MonoBehaviour:
   m_MinValue: 0
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0.389
+  m_Value: 1
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &716303611
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716303608}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acd3120775fee29428afb321f0b96e81, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: '::'
+  bar: {fileID: 716303610}
+  originalbarValue: 1
+  cooldown: 1
 --- !u!1 &726343160
 GameObject:
   m_ObjectHideFlags: 0
@@ -1806,7 +1822,7 @@ MonoBehaviour:
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 0.389
+  m_FillAmount: 1
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
@@ -2261,6 +2277,10 @@ PrefabInstance:
       propertyPath: Weapon
       value: 
       objectReference: {fileID: 1561452874}
+    - target: {fileID: 1570499842428001254, guid: 2ee037b70c3d9ed4ab1fe818ab66fc9c, type: 3}
+      propertyPath: DashSlider
+      value: 
+      objectReference: {fileID: 716303610}
     - target: {fileID: 1570499842428001254, guid: 2ee037b70c3d9ed4ab1fe818ab66fc9c, type: 3}
       propertyPath: speedSlide
       value: 1

@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Timeline;
+using UnityEngine.UI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -32,6 +33,7 @@ public class PlayerController : MonoBehaviour
     bool canMove = true;
     [SerializeField] float CooldownDash;
     [SerializeField] TrailRenderer trailRenderer;
+    
 
     [Header("Configuation Attack")]
     bool canAttack;
@@ -181,6 +183,7 @@ public class PlayerController : MonoBehaviour
         {
 
             StartCoroutine(Dashc());
+            
 
         }
     }
