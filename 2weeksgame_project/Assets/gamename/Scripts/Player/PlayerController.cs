@@ -77,7 +77,7 @@ public class PlayerController : MonoBehaviour
         Dash();
         Attack();
         Slice();
-
+       
 
 
     }
