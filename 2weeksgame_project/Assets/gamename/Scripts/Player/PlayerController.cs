@@ -105,6 +105,7 @@ public class PlayerController : MonoBehaviour
         {
 
             playerRb.linearVelocity = new Vector2(playerRb.linearVelocity.x, Mathf.Clamp(playerRb.linearVelocity.y, -speedSlide, float.MaxValue));
+            
 
         }
 
@@ -143,7 +144,7 @@ public class PlayerController : MonoBehaviour
         {
             isGrounded = false;
             playerRb.AddForce(new Vector2(0f, powerJump));
-
+            
         }
 
     }
@@ -245,6 +246,7 @@ public class PlayerController : MonoBehaviour
         jumpInWall = true;
         yield return new WaitForSeconds(timeJumpWall);
         jumpInWall = false;
+       
 
     }
 
@@ -292,7 +294,7 @@ public class PlayerController : MonoBehaviour
     {
         Gizmos.color = Color.yellow;
         //Gizmos.DrawCube(groundCheck.position, radiusBox);
-        //  Gizmos.DrawCube(wallController.position, boxDimensionSlide);
+       // Gizmos.DrawCube(wallController.position, boxDimensionSlide);
 
     }
 
