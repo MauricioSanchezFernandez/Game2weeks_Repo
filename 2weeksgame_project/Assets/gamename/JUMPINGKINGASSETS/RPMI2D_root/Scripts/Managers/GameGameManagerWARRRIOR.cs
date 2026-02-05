@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class GameManager : MonoBehaviour
+public class GameManagerWARRRIOR : MonoBehaviour
 {
     //Declaración del Singleton
     private static GameManager instance;
